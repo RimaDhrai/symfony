@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Books{% endblock %}
+
+{% block body %}
+    <h1 align="center">List Books</h1>
+    <table align="center" border="1">
+        <tr>
+            <th>id</th>
+            <th>Reference</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Publication Date</th>
+            <th>Published</th>
+            <th>Actions</th>
+        </tr>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.ref }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.category }}</td>
+                <td>{{ book.publicationDate|date('Y-m-d') }}</td>
+                <td>{{ book.published ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('update_book', { id: book.id}) }}">Update</a>
+                    <a href="{{ path('delete', { id: book.id }) }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <p><a href="{{ path('add_book') }}">Add Book</a></p>
+</body>
+</html>
+{% endblock %}
